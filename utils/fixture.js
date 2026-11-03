@@ -1,6 +1,6 @@
 const base = require("@playwright/test");
 const { request: playwrightRequest } = require("@playwright/test");
-const { APIUtils } = require("./apiUtils.js");
+const { APIUtils } = require("./APIUtils.js");
 
 const loginPayLoad = {
   userEmail: "girish.nayakar25@gmail.com",
