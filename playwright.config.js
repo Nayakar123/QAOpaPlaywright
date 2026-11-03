@@ -15,7 +15,7 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
   timeout: 40 * 1000,
-  workers: 1,
+  workers: 4,
   retries: 1,
   expect: {
     timeout: 40 * 1000,
@@ -26,7 +26,7 @@ export default defineConfig({
     actionTimeout: 10 * 1000,
     NavigationTimeout: 30 * 1000,
     browserName: "chromium",
-    headless: false,
+    headless: !!process.env.CI,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
