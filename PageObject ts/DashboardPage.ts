@@ -13,20 +13,25 @@ export class DashboardPage {
     this.cart = page.locator("[routerlink*='cart']");
   }
 
-  async seachProductsAndAddToCart(productName: String) {
+  async seachProductsAndAddToCart(productName: string) {
     await this.productText.first().waitFor();
 
-    // Getting the Products count
+    const normalizedProductName = productName.trim().toLowerCase();
     const productsCount = await this.products.count();
     for (let i = 0; i < productsCount; ++i) {
-      if (
-        (await this.products.nth(i).locator("b").textContent()) === productName
-      ) {
-        // Click on Add to Cart button
+      const displayedProductName = (
+        await this.products.nth(i).locator("b").textContent()
+      )
+        ?.trim()
+        .toLowerCase();
+
+      if (displayedProductName === normalizedProductName) {
         await this.products.nth(i).locator("text= Add To Cart").click();
-        break;
+        return;
       }
     }
+
+    throw new Error(`Product "${productName}" was not found on the dashboard.`);
   }
   async navigateToCart() {
     await this.cart.click();
