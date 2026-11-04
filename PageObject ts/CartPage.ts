@@ -18,7 +18,13 @@ export class CartPage {
 
   constructor(page: Page, productName: string) {
     this.page = page;
-    this.productsList = page.locator(`h3:has-text("${productName}")`);
+    const escapedProductName = productName.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&",
+    );
+    this.productsList = page.locator("h3").filter({
+      hasText: new RegExp(escapedProductName, "i"),
+    });
     this.checkOutLink = page.locator("text=Checkout");
     this.cvvField = page
       .locator("div.field.small")
