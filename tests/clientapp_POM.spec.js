@@ -4,7 +4,7 @@ const dataSet = JSON.parse(
   JSON.stringify(require("../utils/clientapp_POM_TestData.json")),
 );
 
-//E2E Test Integrated with CICD Pipeline
+//E2E Test Integrated with CICD Pipeline new changes
 for (const data of dataSet) {
   test(`@Web Client App E2E Validation for ${data.productName}`, async ({
     page,
